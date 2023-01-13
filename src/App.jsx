@@ -5,12 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Button from 'react-bootstrap/Button';
 
+import Ticker from './components/Ticker.jsx';
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <Button></Button>
+		<Ticker></Ticker>
     </div>
   )
 }
