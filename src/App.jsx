@@ -11,8 +11,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-		<Ticker></Ticker>
+    <div style={{width: "100%", height: "100%", backgroundColor: "green"}} className="App">
+
     </div>
   )
 }
