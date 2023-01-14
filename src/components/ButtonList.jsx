@@ -3,11 +3,12 @@ import Container from 'react-bootstrap/Container';
 
 import Ticker from './Ticker.jsx';
 
-class ButtonList extends Component {
-  render() {
-    return <Container fluid>
-		<Ticker></Ticker>
-	</Container>;
-  }
+const ButtonList = ({Title}) => {
+  return (
+    <Container fluid>
+      <Ticker Title={Title}></Ticker>
+    </Container>
+  )
 }
-export default ButtonList;
+
+export default ButtonList
