@@ -13,6 +13,9 @@ function App() {
   return (
     <div style={{width: "100%", height: "100%", backgroundColor: "#101010"}} className="App">
 		<ButtonList></ButtonList>
+    <ButtonList></ButtonList>
+    <ButtonList></ButtonList>
+    <ButtonList></ButtonList>
     </div>
   )
 }

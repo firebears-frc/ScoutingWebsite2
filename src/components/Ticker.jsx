@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState , useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
@@ -10,32 +10,26 @@ import './Ticker.css';
 import DownIcon from '../assets/chevron-down.svg'
 import UpIcon from '../assets/chevron-up.svg'
 
-class Ticker extends Component {
-  constructor(props) {
-    super(props);
-	this.state = {value:0};
-	this.increment = (val) => {
-	  this.setState((state, props) => ({
-		value: state.value + val
-	  }));
-	}
-  }
-  render() {
-    return <Row>
-		<Col>
-			<Button className="tallbtn" onClick={() => this.increment(-1)}>
-			<img src={DownIcon} alt="chevron-down" />
-			</Button>
-		</Col>
-		<Col>
-			<Alert>{this.state.value}</Alert>
-		</Col>
-		<Col>
-			<Button className="tallbtn" onClick={() => this.increment(1)}>
-				<img src={UpIcon} alt="chevron-up" />
-			</Button>
-		</Col>
-	</Row>;
-  }
+const Ticker = () => {
+	let [num,setNum] = useState(0);
+
+	return (
+		<Row>
+			<Col>
+				<Button className="tallbtn" onClick={() => setNum(--num)}>
+				<img src={DownIcon} alt="chevron-down" />
+				</Button>
+			</Col>
+			<Col>
+				<Alert>{num}</Alert>
+			</Col>
+			<Col>
+				<Button className="tallbtn" onClick={() => setNum(++num)}>
+					<img src={UpIcon} alt="chevron-up" />
+				</Button>
+			</Col>
+		</Row>
+	)
 }
+
 export default Ticker;
