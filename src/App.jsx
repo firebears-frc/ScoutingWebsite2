@@ -5,14 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Button from 'react-bootstrap/Button';
 
-import Ticker from './components/Ticker.jsx';
+import ButtonList from './components/ButtonList.jsx';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div style={{width: "100%", height: "100%", backgroundColor: "green"}} className="App">
-
+    <div style={{width: "100%", height: "100%", backgroundColor: "#101010"}} className="App">
+		<ButtonList></ButtonList>
     </div>
   )
 }

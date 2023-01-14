@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-class Ticker extends Component {
+import Container from 'react-bootstrap/Container';
+
+import Ticker from './Ticker.jsx';
+
+class ButtonList extends Component {
   render() {
-    return <h2>Hi, I am a Car!</h2>;
+    return <Container fluid>
+		<Ticker></Ticker>
+	</Container>;
   }
 }
-export default Ticker;
+export default ButtonList;
