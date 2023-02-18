@@ -49,8 +49,16 @@ function App() {
         onClick={() => {setChooseTeam(true)}}
       >Logout</button>
       </div>
-      <ButtonList Title="CONES Picked Up"/>
-      <ButtonList Title="CUBES Picked Up"/>
+      <div style={{width: "auto", borderBottom: "1px solid white"}}>
+        <ButtonList Title="Cones High"/>
+        <ButtonList Title="Cones Mid"/>
+        <ButtonList Title="Cones Bottom"/>
+      </div>
+      <div style={{width: "auto", borderBottom: "1px solid white"}}>
+        <ButtonList Title="Cubes High"/>
+        <ButtonList Title="Cubes Mid"/>
+        <ButtonList Title="Cubes Bottom"/>
+      </div>
     </div>
   )
 }

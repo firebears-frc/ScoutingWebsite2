@@ -15,7 +15,7 @@ const Ticker = ({Title}) => {
 
 	return (
 		<div>
-			<div style={{width: '100%', height: '100%', color: 'white', borderBottom: '1px solid white',marginBottom: '5px'}}>{Title}</div>
+			<div style={{width: 'auto', height: '100%', color: 'white', textDecoration: 'underline',marginBottom: '5px'}}>{Title}</div>
 			<Row>
 				<Col>
 					<Button className="tallbtn" onClick={() => setNum(num <= 0 ? 0 : --num)}>
