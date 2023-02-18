@@ -29,6 +29,8 @@ function App() {
       {
         choosingTeam ? <TeamSelection CallbackFunction={onTeamChoose}/> : ""
       }
+
+      <div style={{width: '100%', height: '100%', backgroundColor: "#101010", position: 'fixed', display: 'block', zIndex: '-2'}} />
       
       <div
       style={{
@@ -50,17 +52,17 @@ function App() {
         onClick={() => {setChooseTeam(true)}}
       >Logout</button>
       </div>
-      <div style={{width: "auto", borderBottom: "1px solid white"}}>
+      <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
         <ButtonList Title="Cones High"/>
         <ButtonList Title="Cones Mid"/>
         <ButtonList Title="Cones Bottom"/>
       </div>
-      <div style={{width: "auto", borderBottom: "1px solid white"}}>
+      <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
         <ButtonList Title="Cubes High"/>
         <ButtonList Title="Cubes Mid"/>
         <ButtonList Title="Cubes Bottom"/>
       </div>
-      <div style={{width: "auto", borderBottom: "1px solid white"}}>
+      <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
         <AutoTick Title={"Balanced On Beam"}/>
       </div>
     </div>
