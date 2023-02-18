@@ -1,0 +1,17 @@
+:root {
+    --CubesPrimary: #505050;
+    --CubesSecondary: #5e1a03;
+
+    --ConesPrimary: #505050;
+    --ConesSecondary: #5e1a03;
+
+    --ArrowColor: #fff;
+
+    --ButtonsMain: #5e1a03;
+
+    --Background: #232323;
+    --Text: #ffff;
+
+    --TickSelected: #5e1a03;
+    --TickDeselected: #505050;
+}

@@ -3,10 +3,12 @@ import Container from 'react-bootstrap/Container';
 
 import Ticker from './Ticker.jsx';
 
-const ButtonList = ({Title}) => {
+const ButtonList = ({Title,isCone}) => {
   return (
     <Container fluid>
-      <Ticker Title={Title}></Ticker>
+      {
+        isCone ? <Ticker Title={Title} ColorA="--ConesPrimary" ColorB="--ConesSecondary"></Ticker> : <Ticker Title={Title} ColorA="--CubesPrimary" ColorB="--CubesSecondary"></Ticker>
+      }
     </Container>
   )
 }
