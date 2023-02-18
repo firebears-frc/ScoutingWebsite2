@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 import TeamSelection from './components/TeamSelection';
 import ButtonList from './components/ButtonList';
+import AutoTick from './components/AutoTick';
 
 function App() {
   const [choosingTeam,setChooseTeam] = useState(true);
@@ -18,8 +19,8 @@ function App() {
     if(Team == 0 || Match == 0 || Team == null || Match == null) setChooseTeam(true);
     else {
       setChooseTeam(false);
-      setTeamNumber(Team);
-      setMatchNumber(Match);
+      setTeamNumber(parseInt(Team));
+      setMatchNumber(parseInt(Match));
     }
   }
 
@@ -38,7 +39,7 @@ function App() {
         justifyContent: 'right',
         textAlign: 'right',
       }}>
-        TeamNum: {TeamNumber} | MatchNum: {MatchNumber}
+        Match #{MatchNumber} | Team #{TeamNumber}
       
       <button
         style={{
@@ -58,6 +59,9 @@ function App() {
         <ButtonList Title="Cubes High"/>
         <ButtonList Title="Cubes Mid"/>
         <ButtonList Title="Cubes Bottom"/>
+      </div>
+      <div style={{width: "auto", borderBottom: "1px solid white"}}>
+        <AutoTick Title={"Balanced On Beam"}/>
       </div>
     </div>
   )

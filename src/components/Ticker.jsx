@@ -23,7 +23,17 @@ const Ticker = ({Title}) => {
 					</Button>
 				</Col>
 				<Col>
-					<Alert>{num}</Alert>
+					<div style={{
+						width: '100%',
+						height: '100%',
+						backgroundColor: '#0d6efd',
+						border: '1px solid white',
+						color: 'white',
+						borderRadius: '24px',
+						textAlign: 'center',
+						verticalAlign: 'middle',
+						lineHeight: '400%',
+					}}>{num}</div>
 				</Col>
 				<Col>
 					<Button className="tallbtn" onClick={() => setNum(++num)}>
