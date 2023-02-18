@@ -15,9 +15,12 @@ function App() {
 
   function onTeamChoose(Team,Match){
     console.log("Got Team @ " + Team + " : " + Match);
-    setTeamNumber(Team);
-    setMatchNumber(Match);
-    setChooseTeam(false);
+    if(Team == 0 || Match == 0 || Team == null || Match == null) setChooseTeam(true);
+    else {
+      setChooseTeam(false);
+      setTeamNumber(Team);
+      setMatchNumber(Match);
+    }
   }
 
   return (
@@ -26,6 +29,26 @@ function App() {
         choosingTeam ? <TeamSelection CallbackFunction={onTeamChoose}/> : ""
       }
       
+      <div
+      style={{
+        color: "white",
+        borderBottom: '1px solid white',
+        paddingBottom: '1px',
+        marginBottom: '4px',
+        justifyContent: 'right',
+        textAlign: 'right',
+      }}>
+        TeamNum: {TeamNumber} | MatchNum: {MatchNumber}
+      
+      <button
+        style={{
+          marginLeft: '5px',
+          height: '100%',
+          width: 'auto',
+        }}
+        onClick={() => {setChooseTeam(true)}}
+      >Logout</button>
+      </div>
       <ButtonList Title="CONES Picked Up"/>
       <ButtonList Title="CUBES Picked Up"/>
     </div>
