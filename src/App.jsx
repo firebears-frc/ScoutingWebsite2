@@ -44,7 +44,7 @@ function App() {
     if(theme == null) {setTheme('DARK'); ThemeSet = 'DARK';}
     else {setTheme(theme); ThemeSet = theme;}
 
-    localStorage.setItem('Theme',Theme);
+    localStorage.setItem('Theme',ThemeSet);
 
     const Themes = document.getElementsByTagName('style');
     for(let i = 0; i < Themes.length; i++){
@@ -97,7 +97,7 @@ function App() {
         }}    
         onClick={() => {setChooseTeam(true)}}
       >Logout</button>
-      <select onChange={(event) => {changeTheme(event.target.value);}} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
+      <select value={Theme} onChange={(event) => {changeTheme(event.target.value);}} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
       </div>
       <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
         <ButtonList Title="Cones High" isCone={true}/>
