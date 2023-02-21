@@ -20,7 +20,7 @@ const Ticker = ({Title,ColorA,ColorB}) => {
 			<div style={{width: 'auto', height: '100%', color: 'var(--Text)', textDecoration: 'underline',marginBottom: '5px'}}>{Title}</div>
 			<Row>
 				<Col>
-					<Button style={{backgroundColor: 'var(' + ColorA + ')',  border: '2px solid black', color: "var(--Text)"}} className="tallbtn" onClick={() => setNum(num <= 0 ? 0 : --num)}> <ChevronUp color='var(--ArrowColor)'/> </Button>
+					<Button style={{backgroundColor: 'var(' + ColorA + ')',  border: '2px solid black', color: "var(--Text)"}} className="tallbtn" onClick={() => setNum(num <= 0 ? 0 : --num)}> <ChevronDown color='var(--ArrowColor)'/> </Button>
 				</Col>
 				<Col>
 					<div style={{
@@ -36,7 +36,7 @@ const Ticker = ({Title,ColorA,ColorB}) => {
 					}}>{num}</div>
 				</Col>
 				<Col>
-					<Button style={{backgroundColor: 'var(' + ColorA + ')', border: '2px solid black', color: "var(--Text)"}} className="tallbtn" onClick={() => setNum(++num)}> <ChevronDown color='var(--ArrowColor)'/> </Button>
+					<Button style={{backgroundColor: 'var(' + ColorA + ')', border: '2px solid black', color: "var(--Text)"}} className="tallbtn" onClick={() => setNum(++num)}> <ChevronUp color='var(--ArrowColor)'/> </Button>
 				</Col>
 			</Row>
 		</div>

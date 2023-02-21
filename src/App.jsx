@@ -10,12 +10,12 @@ import ButtonList from './components/ButtonList';
 import AutoTick from './components/AutoTick';
 import WLTick from './components/WLTick';
 
-const Light = await import('./themes/Light.css');
-const Dark = await import('./themes/Dark.css');
+import './themes/Dark.css';
+import './themes/Light.css';
 
 const Themes = [
-  'Dark',
-  'Light'
+  'DARK',
+  'LIGHT'
 ]
 
 function App() {
@@ -37,19 +37,35 @@ function App() {
     return <option>{X}</option>;
   };
 
-  const [Theme,setTheme] = useState("Dark");
+  const [Theme,setTheme] = useState("DARK");
   function changeTheme(theme){
-    setTheme(theme);
+    console.log("Setting To Theme: " + theme);
+    let ThemeSet;
+    if(theme == null) {setTheme('DARK'); ThemeSet = 'DARK';}
+    else {setTheme(theme); ThemeSet = theme;}
+
+    localStorage.setItem('Theme',Theme);
+
+    const Themes = document.getElementsByTagName('style');
+    for(let i = 0; i < Themes.length; i++){
+      const _Theme = Themes[i].firstChild.data;
+      if((typeof _Theme === 'string' || _Theme instanceof String) && _Theme.includes('/*THEME=') && _Theme.includes(':root')){
+        //Enable or Disable based on Theme
+        let Enabled = _Theme.includes('/*THEME='+ThemeSet);
+        //console.log(_Theme + "\n\n Uses: " + ThemeSet + ". so its " + Enabled);
+        void(document.styleSheets.item(i).disabled=(!Enabled));
+      }
+    }
   }
 
   useEffect(() => {
-    //import(`./themes/${theme}.css`);
+    changeTheme(localStorage.getItem('Theme'));
   }, [])
+  
   
 
   return (
     <Suspense>
-      <Theme/>
       <div style={{width: "100%", height: "100%", backgroundColor: "var(--Background)"}} className="App">
       {
         choosingTeam ? <TeamSelection CallbackFunction={onTeamChoose}/> : ""
@@ -81,7 +97,7 @@ function App() {
         }}    
         onClick={() => {setChooseTeam(true)}}
       >Logout</button>
-      <select onChange={changeTheme} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
+      <select onChange={(event) => {changeTheme(event.target.value);}} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
       </div>
       <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
         <ButtonList Title="Cones High" isCone={true}/>
