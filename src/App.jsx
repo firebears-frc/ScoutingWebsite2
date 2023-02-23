@@ -118,9 +118,11 @@ function App() {
 
   function LoadAll(){
     //Load All Items
-    setChooseTeam(localStorage.getItem('SavedItems') == null || localStorage.getItem('SavedItems') == 'false');
     setMatchNumber(localStorage.getItem('MatchNumber'));
     setTeamNumber(localStorage.getItem('TeamNumber'));
+
+    setChooseTeam(localStorage.getItem('SavedItems') == null || localStorage.getItem('SavedItems') == 'false'
+    || TeamNumber == null || TeamNumber <= 0 || MatchNumber == null || MatchNumber <= 0);
 
     setConesHighA(localStorage.getItem('A_ConesHigh'))
     setConesMidA(localStorage.getItem('A_ConesMid'))
