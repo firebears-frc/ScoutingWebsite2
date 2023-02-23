@@ -15,6 +15,7 @@ import './themes/Dark.css';
 import './themes/Light.css';
 
 import './FirebaseAPI'
+import { addData } from './FirebaseAPI';
 
 const Themes = [
   'DARK',
@@ -105,17 +106,42 @@ function App() {
       'A_CubesHigh' : CubesHighA,
       'A_CubesMid' : CubesMidA,
       'A_CubesLow' : CubesLowA,
+
+      'AutoBalanced' : AutoBalanced,
+      'EndGame' : EndGame,
     }
 
     console.log(Data);
+
+    addData(Data);
+    Reset();
   }
 
   setInterval(function() {
     //Save every X seconds
-    localStorage.setItem('SavedItems',true);
-    localStorage.setItem('TeamNumber',TeamNumber)
-    localStorage.setItem('MatchNumber',MatchNumber)
-    localStorage.setItem('WonMatch',WonMatch)
+    localStorage.setItem('SavedItems', true);
+    localStorage.setItem('TeamNumber', TeamNumber)
+    localStorage.setItem('MatchNumber', MatchNumber)
+    localStorage.setItem('WonMatch', WonMatch)
+    
+    localStorage.setItem('TO_ConesHigh', ConesHighTO);
+    localStorage.setItem('TO_ConesMid', ConesMidTO);
+    localStorage.setItem('TO_ConesHigh', ConesHighTO)
+
+    localStorage.setItem('TO_CubesHigh', CubesHighA)
+    localStorage.setItem('TO_CubesMid', CubesMidA)
+    localStorage.setItem('TO_CubesLow', CubesLowA)
+
+    localStorage.setItem('A_ConesHigh', ConesHighA)
+    localStorage.setItem('A_ConesMid', ConesMidA)
+    localStorage.setItem('A_ConesLow', ConesLowA)
+
+    localStorage.setItem('A_CubesHigh', CubesHighA)
+    localStorage.setItem('A_CubesMid', CubesMidA)
+    localStorage.setItem('A_CubesLow', CubesLowA)
+
+    localStorage.setItem('AutoBalanced', AutoBalanced)
+    localStorage.setItem('EndGame', EndGame)
   }, 5000);
 
   function LoadAll(){
@@ -126,10 +152,29 @@ function App() {
   }
 
   function Reset(){
-    localStorage.setItem('SavedItems',false);
-    localStorage.removeItem('TeamNumber');
-    localStorage.removeItem('MatchNumber');
-    localStorage.removeItem('WonMatch');
+    localStorage.setItem('SavedItems', false);
+    localStorage.setItem('TeamNumber', 0)
+    localStorage.setItem('MatchNumber', 0)
+    localStorage.setItem('WonMatch', 0)
+
+    localStorage.setItem('TO_ConesHigh', 0)
+    localStorage.setItem('TO_ConesMid', 0)
+    localStorage.setItem('TO_ConesLow', 0)
+
+    localStorage.setItem('TO_CubesHigh', 0)
+    localStorage.setItem('TO_CubesMid', 0)
+    localStorage.setItem('TO_CubesLow', 0)
+
+    localStorage.setItem('A_ConesHigh', 0)
+    localStorage.setItem('A_ConesMid', 0)
+    localStorage.setItem('A_ConesLow', 0)
+
+    localStorage.setItem('A_CubesHigh', 0)
+    localStorage.setItem('A_CubesMid', 0)
+    localStorage.setItem('A_CubesLow', 0)
+
+    localStorage.setItem('AutoBalanced', 0)
+    localStorage.setItem('EndGame', 0)
 
     setChooseTeam(false);
     LoadAll();
