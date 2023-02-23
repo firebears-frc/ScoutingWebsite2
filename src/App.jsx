@@ -12,7 +12,6 @@ import AutoTick from './components/AutoTick';
 import WLTick from './components/WLTick';
 
 import './themes/Dark.css';
-import './themes/Light.css';
 
 import './FirebaseAPI'
 import { addData } from './FirebaseAPI';
@@ -117,45 +116,39 @@ function App() {
     Reset();
   }
 
-  setInterval(function() {
-    //Save every X seconds
-    localStorage.setItem('SavedItems', true);
-    localStorage.setItem('TeamNumber', TeamNumber)
-    localStorage.setItem('MatchNumber', MatchNumber)
-    localStorage.setItem('WonMatch', WonMatch)
-    
-    localStorage.setItem('TO_ConesHigh', ConesHighTO);
-    localStorage.setItem('TO_ConesMid', ConesMidTO);
-    localStorage.setItem('TO_ConesHigh', ConesHighTO)
-
-    localStorage.setItem('TO_CubesHigh', CubesHighA)
-    localStorage.setItem('TO_CubesMid', CubesMidA)
-    localStorage.setItem('TO_CubesLow', CubesLowA)
-
-    localStorage.setItem('A_ConesHigh', ConesHighA)
-    localStorage.setItem('A_ConesMid', ConesMidA)
-    localStorage.setItem('A_ConesLow', ConesLowA)
-
-    localStorage.setItem('A_CubesHigh', CubesHighA)
-    localStorage.setItem('A_CubesMid', CubesMidA)
-    localStorage.setItem('A_CubesLow', CubesLowA)
-
-    localStorage.setItem('AutoBalanced', AutoBalanced)
-    localStorage.setItem('EndGame', EndGame)
-  }, 5000);
-
   function LoadAll(){
     //Load All Items
-    setChooseTeam(localStorage.getItem('SavedItems') != null && localStorage.getItem('SavedItems') == true);
+    setChooseTeam(localStorage.getItem('SavedItems') == null || localStorage.getItem('SavedItems') == 'false');
     setMatchNumber(localStorage.getItem('MatchNumber'));
     setTeamNumber(localStorage.getItem('TeamNumber'));
+
+    setConesHighA(localStorage.getItem('A_ConesHigh'))
+    setConesMidA(localStorage.getItem('A_ConesMid'))
+    setConesLowA(localStorage.getItem('A_ConesLow'))
+
+    setCubesHighA(localStorage.getItem('A_CubesHigh'))
+    setCubesMidA(localStorage.getItem('A_CubesMid'))
+    setCubesLowA(localStorage.getItem('A_CubesLow'))
+
+    setConesHighTO(localStorage.getItem('TO_ConesHigh'))
+    setConesMidTO(localStorage.getItem('TO_ConesMid'))
+    setConesLowTO(localStorage.getItem('TO_ConesLow'))
+
+    setCubesHighTO(localStorage.getItem('TO_CubesHigh'))
+    setCubesMidTO(localStorage.getItem('TO_CubesMid'))
+    setCubesLowTO(localStorage.getItem('TO_CubesLow'))
+
+    setAutoBalanced(localStorage.getItem('AutoBalanced'))
+    setEndGame(localStorage.getItem('EndGame'))
+
+    setWonMatch(localStorage.getItem('WonMatch'))
   }
 
   function Reset(){
     localStorage.setItem('SavedItems', false);
     localStorage.setItem('TeamNumber', 0)
     localStorage.setItem('MatchNumber', 0)
-    localStorage.setItem('WonMatch', 0)
+    localStorage.setItem('WonMatch', false)
 
     localStorage.setItem('TO_ConesHigh', 0)
     localStorage.setItem('TO_ConesMid', 0)
@@ -183,6 +176,34 @@ function App() {
   useEffect(() => {
     changeTheme(localStorage.getItem('Theme'));
     LoadAll();
+
+    const interval = setInterval(function() {
+      //Save every X seconds
+      localStorage.setItem('SavedItems', !choosingTeam);
+      localStorage.setItem('TeamNumber', TeamNumber)
+      localStorage.setItem('MatchNumber', MatchNumber)
+      localStorage.setItem('WonMatch', WonMatch)
+  
+      localStorage.setItem('TO_ConesHigh', ConesHighTO);
+      localStorage.setItem('TO_ConesMid', ConesMidTO);
+      localStorage.setItem('TO_ConesHigh', ConesHighTO)
+  
+      localStorage.setItem('TO_CubesHigh', CubesHighA)
+      localStorage.setItem('TO_CubesMid', CubesMidA)
+      localStorage.setItem('TO_CubesLow', CubesLowA)
+  
+      localStorage.setItem('A_ConesHigh', ConesHighA)
+      localStorage.setItem('A_ConesMid', ConesMidA)
+      localStorage.setItem('A_ConesLow', ConesLowA)
+  
+      localStorage.setItem('A_CubesHigh', CubesHighA)
+      localStorage.setItem('A_CubesMid', CubesMidA)
+      localStorage.setItem('A_CubesLow', CubesLowA)
+  
+      localStorage.setItem('AutoBalanced', AutoBalanced)
+      localStorage.setItem('EndGame', EndGame)
+    }, 3000);
+    return () => clearInterval(interval);
   }, [])
 
   return (
@@ -218,7 +239,8 @@ function App() {
         }}    
         onClick={() => {Reset(); setChooseTeam(true);}}
       >Logout</button>
-      <select value={Theme} onChange={(event) => {changeTheme(event.target.value);}} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
+      {/**<select value={Theme} onChange={(event) => {changeTheme(event.target.value);}} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
+      */}
       </div>
 
       {/** AUTO PICK-UP */}
