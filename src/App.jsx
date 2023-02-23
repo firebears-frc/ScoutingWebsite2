@@ -4,6 +4,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Button from 'react-bootstrap/Button';
+import {Col,Row} from 'react-bootstrap';
 
 import TeamSelection from './components/TeamSelection';
 import ButtonList from './components/ButtonList';
@@ -13,15 +14,36 @@ import WLTick from './components/WLTick';
 import './themes/Dark.css';
 import './themes/Light.css';
 
+import './FirebaseAPI'
+
 const Themes = [
   'DARK',
-  'LIGHT'
+  'LIGHT',
 ]
 
 function App() {
   const [choosingTeam,setChooseTeam] = useState(true);
   const [TeamNumber,setTeamNumber] = useState(0);
   const [MatchNumber,setMatchNumber] = useState(0);
+
+  const [ConesHighA,setConesHighA] = useState(0);
+  const [ConesMidA,setConesMidA] = useState(0);
+  const [ConesLowA,setConesLowA] = useState(0);
+  const [CubesHighA,setCubesHighA] = useState(0);
+  const [CubesMidA,setCubesMidA] = useState(0);
+  const [CubesLowA,setCubesLowA] = useState(0);
+
+  const [ConesHighTO,setConesHighTO] = useState(0);
+  const [ConesMidTO,setConesMidTO] = useState(0);
+  const [ConesLowTO,setConesLowTO] = useState(0);
+  const [CubesHighTO,setCubesHighTO] = useState(0);
+  const [CubesMidTO,setCubesMidTO] = useState(0);
+  const [CubesLowTO,setCubesLowTO] = useState(0);
+
+  const [AutoBalanced,setAutoBalanced] = useState(0);
+  const [EndGame,setEndGame] = useState(0);
+
+  const [WonMatch,setWonMatch] = useState(false);
 
   function onTeamChoose(Team,Match){
     console.log("Got Team @ " + Team + " : " + Match);
@@ -57,15 +79,70 @@ function App() {
       }
     }
   }
+ 
+  function Submit(){
+    //Show Waiting To Submit Document Thingy
+    //TO = TeleOp
+    //A = Autonomous
+    console.log("Waiting To Submit Document...")
+    let Data = {
+      'TeamNumber' : TeamNumber,
+      'MatchNumber' : MatchNumber,
+      'WonMatch' : WonMatch,
+
+      'TO_ConesHigh' : ConesHighTO,
+      'TO_ConesMid' : ConesMidTO,
+      'TO_ConesLow' : ConesLowTO,
+
+      'TO_CubesHigh' : CubesHighA,
+      'TO_CubesMid' : CubesMidA,
+      'TO_CubesLow' : CubesLowA,
+
+      'A_ConesHigh' : ConesHighA,
+      'A_ConesMid' : ConesMidA,
+      'A_ConesLow' : ConesLowA,
+
+      'A_CubesHigh' : CubesHighA,
+      'A_CubesMid' : CubesMidA,
+      'A_CubesLow' : CubesLowA,
+    }
+
+    console.log(Data);
+  }
+
+  setInterval(function() {
+    //Save every X seconds
+    localStorage.setItem('SavedItems',true);
+    localStorage.setItem('TeamNumber',TeamNumber)
+    localStorage.setItem('MatchNumber',MatchNumber)
+    localStorage.setItem('WonMatch',WonMatch)
+  }, 5000);
+
+  function LoadAll(){
+    //Load All Items
+    setChooseTeam(localStorage.getItem('SavedItems') != null && localStorage.getItem('SavedItems') == true);
+    setMatchNumber(localStorage.getItem('MatchNumber'));
+    setTeamNumber(localStorage.getItem('TeamNumber'));
+  }
+
+  function Reset(){
+    localStorage.setItem('SavedItems',false);
+    localStorage.removeItem('TeamNumber');
+    localStorage.removeItem('MatchNumber');
+    localStorage.removeItem('WonMatch');
+
+    setChooseTeam(false);
+    LoadAll();
+  }
 
   useEffect(() => {
     changeTheme(localStorage.getItem('Theme'));
+    LoadAll();
   }, [])
-  
-  
 
   return (
     <Suspense>
+      {/** TOP BAR */}
       <div style={{width: "100%", height: "100%", backgroundColor: "var(--Background)"}} className="App">
       {
         choosingTeam ? <TeamSelection CallbackFunction={onTeamChoose}/> : ""
@@ -75,7 +152,6 @@ function App() {
       
       <div
       style={{
-        color: "white",
         borderBottom: '1px solid white',
         paddingBottom: '1px',
         marginBottom: '4px',
@@ -95,29 +171,55 @@ function App() {
           backgroundColor: 'var(--ButtonsMain)',
           color: 'var(--Text)'
         }}    
-        onClick={() => {setChooseTeam(true)}}
+        onClick={() => {Reset(); setChooseTeam(true);}}
       >Logout</button>
       <select value={Theme} onChange={(event) => {changeTheme(event.target.value);}} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
       </div>
-      <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
-        <ButtonList Title="Cones High" isCone={true}/>
-        <ButtonList Title="Cones Mid" isCone={true}/>
-        <ButtonList Title="Cones Bottom" isCone={true}/>
+
+      {/** AUTO PICK-UP */}
+      <div style={{width: "auto", paddingBottom: '12px'}}>
+        <ButtonList Value={ConesHighA} setValue={setConesHighA} Title="[AUTO] Cones High" isCone={true}/>
+        <ButtonList Value={ConesMidA} setValue={setConesMidA} Title="[AUTO] Cones Mid" isCone={true}/>
+        <ButtonList Value={ConesLowA} setValue={setConesLowA} Title="[AUTO] Cones Bottom" isCone={true}/>
       </div>
       <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
-        <ButtonList Title="Cubes High"/>
-        <ButtonList Title="Cubes Mid"/>
-        <ButtonList Title="Cubes Bottom"/>
+        <ButtonList Value={CubesHighA} setValue={setCubesHighA} Title="[AUTO] Cones High" isCone={true}/>
+        <ButtonList Value={CubesMidA} setValue={setCubesMidA} Title="[AUTO] Cones Mid" isCone={true}/>
+        <ButtonList Value={CubesLowA} setValue={setCubesLowA} Title="[AUTO] Cones Bottom" isCone={true}/>
+      </div>
+
+      {/** TELEOP PICK-UP */}
+      <div style={{width: "auto", paddingBottom: '12px'}}>
+        <ButtonList Value={ConesHighTO} setValue={setConesHighTO} Title="Cones High" isCone={true}/>
+        <ButtonList Value={ConesMidTO} setValue={setConesMidTO} Title="Cones Mid" isCone={true}/>
+        <ButtonList Value={ConesLowTO} setValue={setConesLowTO} Title="Cones Bottom" isCone={true}/>
+      </div>
+      <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
+        <ButtonList Value={CubesHighTO} setValue={setCubesHighTO} Title="Cones High" isCone={true}/>
+        <ButtonList Value={CubesMidTO} setValue={setCubesMidTO} Title="Cones Mid" isCone={true}/>
+        <ButtonList Value={CubesLowTO} setValue={setCubesLowTO} Title="Cones Bottom" isCone={true}/>
       </div>
       {/** AUTO */}
       <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
-        <AutoTick Title={"AUTO Balanced On Charge Station"}/>
-        <AutoTick Title={"ENDGAME Charge Station"} isEnd={true}/>
+        <AutoTick isTicked={AutoBalanced} onTicked={setAutoBalanced} Title={"AUTO Balanced On Charge Station"}/>
+        <AutoTick isTicked={EndGame} onTicked={setEndGame} Title={"ENDGAME Charge Station"} isEnd={true}/>
       </div>
 
       {/** WIN / LOSE */}
-      <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
-        <WLTick Title={"Won Match?"}/>
+      <div style={{width: "auto", borderBottom: "0px solid white", paddingBottom: '8px'}}>
+        <WLTick isTicked={WonMatch} onTicked={setWonMatch} Title={"Won Match?"}/>
+      </div>
+
+      {/**SUBMIT*/}
+      <div style={{width: "auto", borderBottom: "0px solid white", paddingTop: '0px', paddingBottom: '15px'}}>
+          <Button style={{
+            width: '97.5%',
+            height: '100%',
+            backgroundColor: 'var(--ButtonsMain)',
+            color: 'var(--Text)',
+            border: '0px',
+            marginLeft: '15px',
+            }} onClick={Submit}>SUBMIT</Button>
       </div>
     </div>
     </Suspense>

@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
 const WLTick = ({Title,isTicked,onTicked}) => {
-  const [isButtonOn,setButtonOn] = useState(0);
 
   return (
     <Container fluid>
@@ -15,18 +14,18 @@ const WLTick = ({Title,isTicked,onTicked}) => {
         <div style={{width: 'auto', height: '100%', color: 'white', textDecoration: 'underline',marginBottom: '5px', marginLeft: '5px'}}>{Title}</div>
         <Row style={{marginBottom: '10px'}}>
           <Col>
-            <Button onClick={() => {setButtonOn(0)}} style={{
+            <Button onClick={() => {onTicked(false)}} style={{
               width: '100%',
               height: '100%',
-              backgroundColor: isButtonOn == 0 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
+              backgroundColor: isTicked == false ? 'var(--TickSelected)' : 'var(--TickDeselected)',
               border: '2px solid black'
             }}>Lose</Button>
           </Col>
           <Col>
-          <Button onClick={() => {setButtonOn(1)}} style={{
+          <Button onClick={() => {onTicked(true)}} style={{
               width: '100%',
               height: '100%',
-              backgroundColor: isButtonOn == 1 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
+              backgroundColor: isTicked == true ? 'var(--TickSelected)' : 'var(--TickDeselected)',
               border: '2px solid black'
             }}>Win</Button>
           </Col>

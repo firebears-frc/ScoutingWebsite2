@@ -7,49 +7,47 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
 const AutoTick = ({Title,isTicked,onTicked,isEnd}) => {
-  const [isButtonOn,setButtonOn] = useState(0);
-
   return (
     <Container fluid>
       <div>
         <div style={{width: 'auto', height: '100%', color: 'var(--Text)', textDecoration: 'underline',marginBottom: '5px', marginLeft: '5px'}}>{Title}</div>
         <Row style={{marginBottom: '10px'}}>
           <Col>
-            <Button onClick={() => {setButtonOn(0)}} style={{
+            <Button onClick={() => {onTicked(0)}} style={{
               width: '100%',
               height: '100%',
-              backgroundColor: isButtonOn == 0 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
-              fontWeight: isButtonOn == 0 ? 'bold' : 'normal',
+              backgroundColor: isTicked == 0 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
+              fontWeight: isTicked == 0 ? 'bold' : 'normal',
               border: '2px solid black'
             }}>Off</Button>
           </Col>
           {
             isEnd ? <Col>
-            <Button onClick={() => {setButtonOn(1)}} style={{
+            <Button onClick={() => {onTicked(1)}} style={{
                 width: '100%',
                 height: '100%',
-                backgroundColor: isButtonOn == 1 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
-                fontWeight: isButtonOn == 1 ? 'bold' : 'normal',
+                backgroundColor: isTicked == 1 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
+                fontWeight: isTicked == 1 ? 'bold' : 'normal',
                 border: '2px solid black'
               }}>Parked</Button>
             </Col>
             : ''
           }
           <Col>
-          <Button onClick={() => {setButtonOn(2)}} style={{
+          <Button onClick={() => {onTicked(2)}} style={{
               width: '100%',
               height: '100%',
-              backgroundColor: isButtonOn == 2 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
-              fontWeight: isButtonOn == 2 ? 'bold' : 'normal',
+              backgroundColor: isTicked == 2 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
+              fontWeight: isTicked == 2 ? 'bold' : 'normal',
               border: '2px solid black'
             }}>Docked</Button>
           </Col>
           <Col>
-          <Button onClick={() => {setButtonOn(3)}} style={{
+          <Button onClick={() => {onTicked(3)}} style={{
               width: '100%',
               height: '100%',
-              backgroundColor: isButtonOn == 3 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
-              fontWeight: isButtonOn == 3 ? 'bold' : 'normal',
+              backgroundColor: isTicked == 3 ? 'var(--TickSelected)' : 'var(--TickDeselected)',
+              fontWeight: isTicked == 3 ? 'bold' : 'normal',
               border: '2px solid black'
             }}>Docked & Engaged (BALANCED)</Button>
           </Col>
