@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import SingleItem from './SingleItem'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <h1>Data Goes Here</h1>
+    <SingleItem/>
   </React.StrictMode>,
 )
