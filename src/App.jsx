@@ -40,6 +40,8 @@ function App() {
   const [CubesMidTO,setCubesMidTO] = useState(0);
   const [CubesLowTO,setCubesLowTO] = useState(0);
 
+  const [Message,setMessage] = useState('');
+
   const [AutoBalanced,setAutoBalanced] = useState(0);
   const [EndGame,setEndGame] = useState(0);
 
@@ -109,11 +111,12 @@ function App() {
 
       'AutoBalanced' : AutoBalanced,
       'EndGame' : EndGame,
+      'Notes' : Message,
     }
 
     console.log(Data);
 
-    //addData(Data);
+    addData(Data);
     //Reset();
   }
 
@@ -278,13 +281,14 @@ function App() {
       </div>
 
       {/** WIN / LOSE */}
+      {/*
       <div style={{width: "auto", borderBottom: "0px solid white", paddingBottom: '8px'}}>
         <WLTick isTicked={WonMatch} onTicked={setWonMatch} Title={"Won Match?"}/>
       </div>
+      */}
       
       <div style={{width: "auto", borderBottom: "0px solid white", paddingBottom: '8px', width: '98%', height: '25%'}}>
-        <textarea placeholder='Was There a Red or Yellow Card? Did the Robt Become Disabled? Did They Play Defense? Did Someone Play Defense on Them? What Else Should the Drivers Know?' type='text' style={{width: '100%', height: '100%', marginLeft: '1%'}}>
-        </textarea>
+        <textarea placeholder='Was There a Red or Yellow Card? Did the Robt Become Disabled? Did They Play Defense? Did Someone Play Defense on Them? What Else Should the Drivers Know?' type='text' style={{width: '100%', height: '100%', marginLeft: '1%', resize: 'none'}} onChange={(event) => {setMessage(event.target.value)}} value={Message}></textarea>
       </div>
 
       {/**SUBMIT*/}
