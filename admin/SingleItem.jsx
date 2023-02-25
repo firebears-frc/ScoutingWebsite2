@@ -8,29 +8,40 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { getData } from '../src/FirebaseAPI';
 
-var rows = [];
-async function getDataFromDB(){
-  rows = await getData();
-  rows.sort((a,b) => {
-    const matchA = a.MatchNumber;
-    const matchB = b.MatchNumber;
+const BasicTable = () => {
+  const [rows,setRows] = useState([]);
+  async function getDataFromDB(){
+    let r = await getData();
+    //Sorting
+    r.sort((a,b) => {
+      const matchA = a.MatchNumber;
+      const matchB = b.MatchNumber;
+    
+      if (matchA < matchB) {
+        return -1;
+      }
+      if (matchA > matchB) {
+        return 1;
+      }
+    
+      // names must be equal
+      return 0;
+    });
+    //Remove Dupes
+    var result = r.reduce((unique, o) => {
+      if(!unique.some(obj => obj.MatchNumber === o.MatchNumber && obj.TeamNumber === o.TeamNumber)) {
+        unique.push(o);
+      }
+      return unique;
+    },[]);
+
+    setRows(result);
+  }
   
-    if (matchA < matchB) {
-      return -1;
-    }
-    if (matchA > matchB) {
-      return 1;
-    }
-  
-    // names must be equal
-    return 0;
-  });
-}
+  useEffect(() => {
+    getDataFromDB();
+  },[])
 
-getDataFromDB();
-
-
-export default function BasicTable() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -44,7 +55,7 @@ export default function BasicTable() {
             <TableCell align="right">TeleOp Total Cubes</TableCell>
             <TableCell align="right">Auto Docked?</TableCell>
             <TableCell align="right">TeleOp Docked?</TableCell>
-            <TableCell align="right">Won Match</TableCell>
+            <TableCell align="right">Extra Notes</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -65,7 +76,7 @@ export default function BasicTable() {
               <TableCell align="right">{row.TO_CubesHigh + row.TO_CubesMid + row.TO_CubesLow}</TableCell>
               <TableCell align="right">{row.AutoBalanced == 0 ? "Off" : row.AutoBalanced == 2 ? "Docked" : row.AutoBalanced == 3 ? "Docked & Engaged" : ""}</TableCell>
               <TableCell align="right">{row.EndGame == 0 ? "Off" : row.EndGame == 1 ? "Parked" : row.EndGame == 2 ? "Docked" : "Docked & Engaged"}</TableCell>
-              <TableCell align="right">{row.WonMatch == true ? "Won" : "Lost"}</TableCell>
+              <TableCell align="right">{row.Notes}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -73,3 +84,5 @@ export default function BasicTable() {
     </TableContainer>
   );
 }
+
+export default BasicTable
