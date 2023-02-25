@@ -45,11 +45,12 @@ function App() {
 
   const [WonMatch,setWonMatch] = useState(false);
 
-  function onTeamChoose(Team,Match){
+  function onTeamChoose(Match,Team){
     console.log("Got Team @ " + Team + " : " + Match);
     if(Team == 0 || Match == 0 || Team == null || Match == null) setChooseTeam(true);
     else {
       setChooseTeam(false);
+      localStorage.setItem('SavedItems', true);
       setTeamNumber(parseInt(Team));
       setMatchNumber(parseInt(Match));
     }
@@ -112,12 +113,14 @@ function App() {
 
     console.log(Data);
 
-    addData(Data);
-    Reset();
+    //addData(Data);
+    //Reset();
   }
 
   function LoadAll(){
     //Load All Items
+
+    /*
     setMatchNumber(localStorage.getItem('MatchNumber'));
     setTeamNumber(localStorage.getItem('TeamNumber'));
 
@@ -144,6 +147,7 @@ function App() {
     setEndGame(localStorage.getItem('EndGame'))
 
     setWonMatch(localStorage.getItem('WonMatch'))
+    */
   }
 
   function Reset(){
@@ -181,7 +185,6 @@ function App() {
 
     const interval = setInterval(function() {
       //Save every X seconds
-      localStorage.setItem('SavedItems', !choosingTeam);
       localStorage.setItem('TeamNumber', TeamNumber)
       localStorage.setItem('MatchNumber', MatchNumber)
       localStorage.setItem('WonMatch', WonMatch)
@@ -246,27 +249,27 @@ function App() {
       </div>
 
       {/** AUTO PICK-UP */}
-      <div style={{width: "auto", paddingBottom: '12px'}}>
+      <div style={{width: "auto", padding: '12px'}}>
         <ButtonList Value={ConesHighA} setValue={setConesHighA} Title="[AUTO] Cones High" isCone={true}/>
         <ButtonList Value={ConesMidA} setValue={setConesMidA} Title="[AUTO] Cones Mid" isCone={true}/>
-        <ButtonList Value={ConesLowA} setValue={setConesLowA} Title="[AUTO] Cones Bottom" isCone={true}/>
+        <ButtonList Value={ConesLowA} setValue={setConesLowA} Title="[AUTO] Cones Low" isCone={true}/>
       </div>
       <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
-        <ButtonList Value={CubesHighA} setValue={setCubesHighA} Title="[AUTO] Cones High" isCone={true}/>
-        <ButtonList Value={CubesMidA} setValue={setCubesMidA} Title="[AUTO] Cones Mid" isCone={true}/>
-        <ButtonList Value={CubesLowA} setValue={setCubesLowA} Title="[AUTO] Cones Bottom" isCone={true}/>
+        <ButtonList Value={CubesHighA} setValue={setCubesHighA} Title="[AUTO] Cubes High" isCone={true}/>
+        <ButtonList Value={CubesMidA} setValue={setCubesMidA} Title="[AUTO] Cubes Mid" isCone={true}/>
+        <ButtonList Value={CubesLowA} setValue={setCubesLowA} Title="[AUTO] Cubes Low" isCone={true}/>
       </div>
 
       {/** TELEOP PICK-UP */}
       <div style={{width: "auto", paddingBottom: '12px'}}>
         <ButtonList Value={ConesHighTO} setValue={setConesHighTO} Title="Cones High" isCone={true}/>
         <ButtonList Value={ConesMidTO} setValue={setConesMidTO} Title="Cones Mid" isCone={true}/>
-        <ButtonList Value={ConesLowTO} setValue={setConesLowTO} Title="Cones Bottom" isCone={true}/>
+        <ButtonList Value={ConesLowTO} setValue={setConesLowTO} Title="Cones Low" isCone={true}/>
       </div>
       <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
-        <ButtonList Value={CubesHighTO} setValue={setCubesHighTO} Title="Cones High" isCone={true}/>
-        <ButtonList Value={CubesMidTO} setValue={setCubesMidTO} Title="Cones Mid" isCone={true}/>
-        <ButtonList Value={CubesLowTO} setValue={setCubesLowTO} Title="Cones Bottom" isCone={true}/>
+        <ButtonList Value={CubesHighTO} setValue={setCubesHighTO} Title="Cubes High" isCone={true}/>
+        <ButtonList Value={CubesMidTO} setValue={setCubesMidTO} Title="Cubes Mid" isCone={true}/>
+        <ButtonList Value={CubesLowTO} setValue={setCubesLowTO} Title="Cubes Low" isCone={true}/>
       </div>
       {/** AUTO */}
       <div style={{width: "auto", borderBottom: "1px solid white", paddingBottom: '12px'}}>
@@ -277,6 +280,11 @@ function App() {
       {/** WIN / LOSE */}
       <div style={{width: "auto", borderBottom: "0px solid white", paddingBottom: '8px'}}>
         <WLTick isTicked={WonMatch} onTicked={setWonMatch} Title={"Won Match?"}/>
+      </div>
+      
+      <div style={{width: "auto", borderBottom: "0px solid white", paddingBottom: '8px', width: '98%', height: '25%'}}>
+        <textarea placeholder='Was There a Red or Yellow Card? Did the Robt Become Disabled? Did They Play Defense? Did Someone Play Defense on Them? What Else Should the Drivers Know?' type='text' style={{width: '100%', height: '100%', marginLeft: '1%'}}>
+        </textarea>
       </div>
 
       {/**SUBMIT*/}
@@ -289,6 +297,11 @@ function App() {
             border: '0px',
             marginLeft: '15px',
             }} onClick={Submit}>SUBMIT</Button>
+      </div>
+
+      {/**SUBMIT*/}
+      <div style={{width: "auto", borderBottom: "0px solid white", paddingTop: '0px', paddingBottom: '15px', color: 'var(--Text)', fontSize: '0.75rem'}}>
+      © Sadiq Ahmed 2023 & Kieran Musser
       </div>
     </div>
     </Suspense>
