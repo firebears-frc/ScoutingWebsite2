@@ -10,6 +10,13 @@ import { getData } from '../src/FirebaseAPI';
 import { Container } from '@mui/material';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
+/** BOI YOU BETTER DO THIS U DUMBASS
+ * FIX GRAPH WORKING CUZ
+ * MAKE POINTS * HOW MUCH THEY DO IT YA FELEME
+ * UPDATE
+ */
+
+
 import {
   Chart as ChartJS,
   CategoryScale,
