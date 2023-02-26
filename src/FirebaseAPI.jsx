@@ -41,6 +41,6 @@ export async function getData(){
     // doc.data() is never undefined for query doc snapshots
     docs.push(doc.data());
   });
-  console.log(docs);
+  //console.log(docs);
   return docs;
 }
