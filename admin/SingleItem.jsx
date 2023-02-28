@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { getData } from '../src/FirebaseAPI';
+import {getData} from "../src/FirebaseAPI"
 import { Container } from '@mui/material';
 import BootstrapSwitchButton from 'bootstrap-switch-button-react'
 
@@ -116,30 +116,17 @@ const BasicTable = () => {
       }
       return unique;
     },[]);
+    var resultFNL = r.reduce((unique, o) => {
+      if(!unique.some(obj => obj.MatchNumber === o.MatchNumber && obj.TeamNumber === o.TeamNumber)) {
+        unique.push(o);
+      }
+      return unique;
+    },[]);
 
-    setData(result);
-    setRows(result);
+    setData(resultFNL);
+    setRows(resultFNL);
 
     //sort based on how good they are
-    /*
-    result.sort((a,b) => {
-      const matchA = (a.TO_ConesHigh + a.TO_ConesMid + a.TO_ConesLow + a.TO_CubesHigh + a.TO_CubesMid + a.TO_CubesLow 
-      + a.A_ConesHigh + a.A_ConesMid + a.A_ConesLow + a.A_CubesHigh + a.A_CubesMid + a.A_CubesLow) + (a.EndGame + a.AutoBalanced);
-      const matchB = (b.TO_ConesHigh + b.TO_ConesMid + b.TO_ConesLow + b.TO_CubesHigh + b.TO_CubesMid + b.TO_CubesLow 
-        + b.A_ConesHigh + b.A_ConesMid + b.A_ConesLow + b.A_CubesHigh + b.A_CubesMid + b.A_CubesLow) + (b.EndGame + b.AutoBalanced);
-    
-      if (matchA > matchB) {
-        return -1;
-      }
-      if (matchA < matchB) {
-        return 1;
-      }
-    
-      // names must be equal
-      return 0;
-    });
-    */
-
     result.sort((a,b) => {
       const matchA = (a.TO_ConesHigh + a.TO_ConesMid + a.TO_ConesLow + a.TO_CubesHigh + a.TO_CubesMid + a.TO_CubesLow 
       + a.A_ConesHigh + a.A_ConesMid + a.A_ConesLow + a.A_CubesHigh + a.A_CubesMid + a.A_CubesLow) + (a.EndGame + a.AutoBalanced);
