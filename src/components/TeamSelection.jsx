@@ -7,7 +7,7 @@ const TeamSelection = ({CallbackFunction}) => {
   const match = params.get("match");
 
   const [teamNum,setTeam] = useState(0); 
-  const [matchNum,setMatch] = useState(0); 
+  const [matchNum,setMatch] = useState(0);
 
   useEffect(() => {
     setTeam(team);
@@ -20,10 +20,10 @@ const TeamSelection = ({CallbackFunction}) => {
         <div className={styles.z} style={{width: '80%', height: '80%', backgroundColor: 'var(--Background)', border: '2px solid var(--Text)', borderRadius: '8px',position: 'absolute', top: '10%', left: '10%', zIndex: '99999 !importiant'}}>
 
             <div style={{width: '100%',height: '8%',color: 'var(--Text)',fontSize: '4vh', borderBottom: '1px solid white', display: 'block', zIndex: '99999 !importiant'}}>Match Number:</div>
-            <input value={teamNum} onChange={(event) => {setTeam(event.target.value)}} type='number' style={{width: '20%', height: '10%', marginTop: '1%', zIndex: '99999 !importiant', marginBottom: "3%", display: 'block', backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)'}}></input>
+            <input value={matchNum} onChange={(event) => {setMatch(event.target.value)}} type='number' style={{width: '20%', height: '10%', marginTop: '1%', zIndex: '99999 !importiant', marginBottom: "3%", display: 'block', backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)'}}></input>
 
             <div style={{width: '100%',height: '8%',color: 'var(--Text)',fontSize: '4vh', borderBottom: '1px solid white', display: 'block', zIndex: '99999 !importiant'}}>Team Number:</div>
-            <input value={matchNum} onChange={(event) => {setMatch(event.target.value)}}  type='number' style={{width: '20%', zIndex: '99999 !importiant', height: '10%', marginTop: '1%', marginBottom: "3%", display: 'block', backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)'}}></input>
+            <input value={teamNum} onChange={(event) => {setTeam(event.target.value)}}  type='number' style={{width: '20%', zIndex: '99999 !importiant', height: '10%', marginTop: '1%', marginBottom: "3%", display: 'block', backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)'}}></input>
             {/*
             <select style={{width: '80%', height: '8%', marginLeft: '10%', marginTop: '1%'}}>
               <option value="2846">Firebears</option>
@@ -46,6 +46,17 @@ const TeamSelection = ({CallbackFunction}) => {
             onClick={
               () => {
                 console.log("Chose Team @ " + teamNum + " : on Match " + matchNum);
+                fetch(`${params.get('server')}:3000`, {
+                  method: 'POST',
+                  headers: {
+                      'Accept': 'text/html',
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({ "name": params.get('name').replace('_',' ') })
+                })
+                .then(response => response.json())
+                .then(response => console.log(JSON.stringify(response)))
+
                 CallbackFunction(teamNum,matchNum)
               }
             }

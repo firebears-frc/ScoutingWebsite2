@@ -47,7 +47,7 @@ function App() {
 
   const [WonMatch,setWonMatch] = useState(false);
 
-  function onTeamChoose(Match,Team){
+  function onTeamChoose(Team,Match){
     console.log("Got Team @ " + Team + " : " + Match);
     if(Team == 0 || Match == 0 || Team == null || Match == null) setChooseTeam(true);
     else {
