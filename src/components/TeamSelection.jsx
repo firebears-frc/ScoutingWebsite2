@@ -44,19 +44,7 @@ const TeamSelection = ({CallbackFunction}) => {
               backgroundColor: 'var(--ButtonsMain)'
             }}
             onClick={
-              () => {
-                console.log("Chose Team @ " + teamNum + " : on Match " + matchNum);
-                fetch(`${params.get('server')}:3000`, {
-                  method: 'POST',
-                  headers: {
-                      'Accept': 'text/html',
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ "name": params.get('name').replace('_',' ') })
-                })
-                .then(response => response.json())
-                .then(response => console.log(JSON.stringify(response)))
-
+              () => {                
                 CallbackFunction(teamNum,matchNum)
               }
             }
