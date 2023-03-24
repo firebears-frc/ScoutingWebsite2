@@ -86,22 +86,6 @@ function App() {
   }
  
   function Submit(){
-    const IP = `http://34.134.104.100:3000`
-      console.log(IP)
-      console.log("Chose Team @ " + TeamNumber + " : on Match " + MatchNumber);
-      fetch(IP, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Accept': 'text/html',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ "name": params.get('name').replace('_',' ') })
-      })
-      .then(response => response.json())
-      .then(response => console.log(JSON.stringify(response)))
-
-
     //Show Waiting To Submit Document Thingy
     //TO = TeleOp
     //A = Autonomous
@@ -135,6 +119,21 @@ function App() {
     console.log(Data);
 
     addData(Data);
+
+    const IP = `http://34.134.104.100:3000`
+      console.log(IP)
+      console.log("Chose Team @ " + TeamNumber + " : on Match " + MatchNumber);
+      fetch(IP, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Accept': 'text/html',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "name": params.get('name').replace('_',' ') })
+      })
+      .then(response => response.json())
+      .then(response => Reset())
     //Reset();
     
   }
