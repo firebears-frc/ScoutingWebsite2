@@ -86,8 +86,7 @@ function App() {
   }
  
   function Submit(){
-    if(window.location.href.includes('server=')){
-      const IP = `http://${params.get('server')}:3000`
+    const IP = `http://34.134.104.100:3000`
       console.log(IP)
       console.log("Chose Team @ " + TeamNumber + " : on Match " + MatchNumber);
       fetch(IP, {
@@ -101,7 +100,6 @@ function App() {
       })
       .then(response => response.json())
       .then(response => console.log(JSON.stringify(response)))
-    }
 
 
     //Show Waiting To Submit Document Thingy
