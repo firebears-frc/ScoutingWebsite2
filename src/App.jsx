@@ -22,6 +22,8 @@ const Themes = [
 ]
 
 function App() {
+  const params = new URLSearchParams(window.location.search);
+  
   const [choosingTeam,setChooseTeam] = useState(true);
   const [TeamNumber,setTeamNumber] = useState(0);
   const [MatchNumber,setMatchNumber] = useState(0);
