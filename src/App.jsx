@@ -89,7 +89,7 @@ function App() {
     if(window.location.href.includes('server=')){
       const IP = `http://${params.get('server')}:3000`
       console.log(IP)
-      console.log("Chose Team @ " + teamNum + " : on Match " + matchNum);
+      console.log("Chose Team @ " + TeamNumber + " : on Match " + MatchNumber);
       fetch(IP, {
         method: 'POST',
         mode: 'no-cors',
