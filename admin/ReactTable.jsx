@@ -187,9 +187,9 @@ const ReactTable = () => {
             else if(lastName != ""){
                 let D = {}
                 D.name = lastName;
-                D.cones = cones / count;
-                D.cubes = cubes / count;
-                D.docked = docks / count;
+                D.cones = (cones / count);
+                D.cubes = (cubes / count);
+                D.docked = (docks / count);
                 objsV2.push(D)
                 count = 0;
 
