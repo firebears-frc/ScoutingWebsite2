@@ -264,7 +264,7 @@ function App() {
           color: 'var(--Text)'
         }}    
         onClick={() => {Reset(); setChooseTeam(true);}}
-      >Logout</button>
+      >Change</button>
       {/**<select value={Theme} onChange={(event) => {changeTheme(event.target.value);}} style={{backgroundColor: 'var(--ButtonsMain)', color: 'var(--Text)', width: '15%', height: '100%'}}>{Themes.map(ArrayToSelect)}</select>
       */}
       </div>
@@ -306,7 +306,7 @@ function App() {
       */}
       
       <div style={{width: "auto", borderBottom: "0px solid white", paddingBottom: '8px', width: '98%', height: '25%'}}>
-        <textarea placeholder='Was There a Red or Yellow Card? Did the Robt Become Disabled? Did They Play Defense? Did Someone Play Defense on Them? What Else Should the Drivers Know?' type='text' style={{width: '100%', height: '100%', marginLeft: '1%', resize: 'none'}} onChange={(event) => {setMessage(event.target.value)}} value={Message}></textarea>
+        <textarea placeholder='Was There a Red or Yellow Card? Did the Robot Become Disabled? Did They Play Defense? Did Someone Play Defense on Them? What Else Should the Drivers Know?' type='text' style={{width: '100%', height: '100%', marginLeft: '1%', resize: 'none'}} onChange={(event) => {setMessage(event.target.value)}} value={Message}></textarea>
       </div>
 
       {/**SUBMIT*/}
@@ -323,7 +323,7 @@ function App() {
 
       {/**SUBMIT*/}
       <div style={{width: "auto", borderBottom: "0px solid white", paddingTop: '0px', paddingBottom: '15px', color: 'var(--Text)', fontSize: '0.75rem'}}>
-      © Sadiq Ahmed 2023 & Kieran Musser
+      © Sadiq Ahmed, Kieran Musser & JJ McKenzie 2023
       </div>
     </div>
     </Suspense>
